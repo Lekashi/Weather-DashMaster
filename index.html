@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather-DashMaster</title>
+</head>
+<body>
+    <div class="searchCity">
+        <h2>Search for a City:</h2>
+        <input type="text" id="fname" name="fname"><br><br>
+        <button id="searchButton"></button>
+    </div>
+    <div class="popCityList">
+        <button class="popCityButtons" id="popCityBut1">New York City</button>
+        <button class="popCityButtons" id="popCityBut2">Los Angeles</button>
+        <button class="popCityButtons" id="popCityBut3">Chicago</button>
+        <button class="popCityButtons" id="popCityBut4">Houston</button>
+        <button class="popCityButtons" id="popCityBut5">Phoenix</button>
+        <button class="popCityButtons" id="popCityBut6">Philadelphia</button>
+        <button class="popCityButtons" id="popCityBut7">San Antonio</button>
+        <button class="popCityButtons" id="popCityBut8">San Diego</button>
+    </div>
+    <div class="weatherTodayStats">
+        <h2 id="cityDate"></h2>
+        <p class="todayStats">Temp: <span id="todayStat1"></span></p>
+        <p class="todayStats">Wind: <span id="todayStat2"></span></p>
+        <p class="todayStats">Humidity: <span id="todayStat3"></span></p>
+        <p class="todayStats">UV Index: <span id="todayStat4"></span></p>
+    </div>
+    <div class="5dayForecast">
+        <div class="day1Ahead">
+            <h3 id="1day"></h3>
+            <p class="dayStats">Temp: <span id="dayStats1"></span></p>
+            <p class="dayStats">Wind: <span id="dayStats2"></span></p>
+            <p class="dayStats">Humidity: <span id="dayStats3"></span></p>
+        </div>
+    </div>
+</body>
+</html>
