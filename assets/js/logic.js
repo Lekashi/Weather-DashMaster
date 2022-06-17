@@ -24,9 +24,14 @@ function searchWeatherFunc(dataObj) {
     var url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${APIkey}`;
     fetch(url)
     .then(response => response.json())
-    .then(data => WeatherRender(dataObj));
+    .then(data => WeatherRender(data));
 }
 
 function WeatherRender(dataObj) {
-
+    console.log(dataObj);
+    $('#place').text(`${state}, ${city}`)
+    $('#todayTemp').text(dataObj.current.temp);
+    $('#todayWind').text(dataObj.current.wind_speed);
+    $('#todayHumid').text(dataObj.current.humidity);
+    $('#todayUvi').text(dataObj.current.uvi);
 }
