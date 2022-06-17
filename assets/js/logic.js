@@ -40,10 +40,13 @@ function WeatherRender(dataObj) {
 function fiveDayForecast(dataObj) {
     for (let index = 1; index < 6; index++) {
         console.log(dataObj.daily[index])
-        $(`#day${index}Ahead`).text(moment().add(index, 'days').format('MMMM DD YYYY'));
+        console.log(`#day${index}Ahead`)
+        $(`#day${index}Ahead`).append(`<h2>${moment().add(index, 'days').format('L')}</h2>`);
         $(`#day${index}Ahead`).append(`<p>Temperature: ${dataObj.daily[index].temp.day} °F</p>`)
         $(`#day${index}Ahead`).append(`<p>Wind: ${dataObj.daily[index].wind_speed} Mph</p>`)
         $(`#day${index}Ahead`).append(`<p>Humidity: ${dataObj.daily[index].humidity}%</p>`)
         $(`#day${index}Ahead`).append(`<p>UV Index: ${dataObj.daily[index].uvi}</p>`)
     }
+
+    
 }
