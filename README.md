@@ -19,4 +19,4 @@
 
 ## Screenshot of the website
 
-![Screenshot of the website](./assets/photos/Screenshot%20(22).png)
+![Screenshot of the website](./assets/photos/Screenshot.png)

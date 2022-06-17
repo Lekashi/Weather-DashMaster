@@ -34,6 +34,20 @@ body {
     height: 2.25rem;
 }
 
+
+.light-mode {
+    background-color: #fff;
+    color: black;
+}
+
+.searchCity {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 60px;
+}
+
 .fivedayForecast {
     display: flex;
     font-size: 20px;
@@ -42,9 +56,16 @@ body {
     align-items: flex-end;
 }
 
-.light-mode {
-    background-color: #fff;
-    color: black;
+.weatherTodayStats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 25px;
+}
+
+p.todayStats {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #intro {
@@ -54,8 +75,16 @@ body {
     justify-content: center;
 }
 
-.searchCity {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
+#currentTime {
+    display: flex;
+    justify-content: center;
+}
+
+#Hero {
+    z-index: 10;
+}
+
+#currentTime {
+display: flex;
+justify-content: center;
 }

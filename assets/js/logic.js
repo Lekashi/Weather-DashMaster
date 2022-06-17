@@ -1,3 +1,4 @@
+setInterval(function (){$('#currentTime').text(moment().format('dddd, MMMM Do YYYY, h:mm:ss a'));}, 1000);
 var APIkey = "b3ffbfc2d2d5a7ba5ea274ccea458047";
 let state;
 let city;
@@ -16,7 +17,6 @@ function searchPosFunc(seachParam) {
 }
 
 function searchWeatherFunc(dataObj) {
-    console.log(dataObj)
     var lat = dataObj[0].lat;
     var lon = dataObj[0].lon;
     city = dataObj[0].name;
@@ -29,7 +29,7 @@ function searchWeatherFunc(dataObj) {
 
 function WeatherRender(dataObj) {
     console.log(dataObj);
-    $('#place').text(`${state}, ${city}`)
+    $('#place').text(`${city}, ${state}`)
     $('#todayTemp').text(`${dataObj.current.temp} °F`);
     $('#todayWind').text(`${dataObj.current.wind_speed} Mph`);
     $('#todayHumid').text(`${dataObj.current.humidity}%`);
@@ -39,14 +39,11 @@ function WeatherRender(dataObj) {
 
 function fiveDayForecast(dataObj) {
     for (let index = 1; index < 6; index++) {
-        console.log(dataObj.daily[index])
-        console.log(`#day${index}Ahead`)
+        $(`#day${index}Ahead`).empty();
         $(`#day${index}Ahead`).append(`<h2>${moment().add(index, 'days').format('L')}</h2>`);
-        $(`#day${index}Ahead`).append(`<p>Temperature: ${dataObj.daily[index].temp.day} °F</p>`)
-        $(`#day${index}Ahead`).append(`<p>Wind: ${dataObj.daily[index].wind_speed} Mph</p>`)
-        $(`#day${index}Ahead`).append(`<p>Humidity: ${dataObj.daily[index].humidity}%</p>`)
-        $(`#day${index}Ahead`).append(`<p>UV Index: ${dataObj.daily[index].uvi}</p>`)
+        $(`#day${index}Ahead`).append(`<p>Temperature: ${dataObj.daily[index].temp.day} °F</p>`);
+        $(`#day${index}Ahead`).append(`<p>Wind: ${dataObj.daily[index].wind_speed} Mph</p>`);
+        $(`#day${index}Ahead`).append(`<p>Humidity: ${dataObj.daily[index].humidity}%</p>`);
+        $(`#day${index}Ahead`).append(`<p>UV Index: ${dataObj.daily[index].uvi}</p>`);
     }
-
-    
 }
