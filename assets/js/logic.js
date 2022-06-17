@@ -19,10 +19,14 @@ function searchWeatherFunc(dataObj) {
     console.log(dataObj)
     var lat = dataObj[0].lat;
     var lon = dataObj[0].lon;
-    var city = dataObj[0].name;
-    var state = dataObj[0].state;
+    city = dataObj[0].name;
+    state = dataObj[0].state;
     var url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${APIkey}`;
     fetch(url)
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => WeatherRender(dataObj));
+}
+
+function WeatherRender(dataObj) {
+
 }

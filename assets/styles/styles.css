@@ -1,0 +1,11 @@
+body {
+    padding: 25px;
+    color: #fff;
+    background-color: #123050;
+    font-size: 25px;
+  }
+  
+  .light-mode {
+    background-color: #fff;
+    color: black;
+  }
