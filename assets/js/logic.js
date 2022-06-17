@@ -28,9 +28,9 @@ function searchWeatherFunc(dataObj) {
         ...localLoc,
         `${city}, ${state}`
     ]
-    localLoc = JSON.parse(localStorage.getItem('location'))||[];
+    JSON.parse(localStorage.getItem('location'))||[];
     localStorage.setItem('location', JSON.stringify(storageArray));
-    LocalStr(localLoc);
+    LocalStr(storageArray);
     var url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${APIkey}&units=imperial`;
     fetch(url)
     .then(response => response.json())
@@ -58,9 +58,8 @@ function fiveDayForecast(dataObj) {
     }
 }
 function LocalStr(localLoc) {
+    $('#recallCityList').empty();
     localLoc.forEach(remPlace => {
-        console.log(remPlace);
-        $('#recallCityList').empty();
         $('#recallCityList').append($(`<li>${remPlace}</li>`));
     });
 }
