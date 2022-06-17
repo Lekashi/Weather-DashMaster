@@ -2,6 +2,9 @@ setInterval(function (){$('#currentTime').text(moment().format('dddd, MMMM Do YY
 var APIkey = "b3ffbfc2d2d5a7ba5ea274ccea458047";
 let state;
 let city;
+let localLoc = JSON.parse(localStorage.getItem('location'))||[];
+LocalStr(localLoc);
+
 $(document).ready(function () {
     $("#searchButton").click(function () {
         searchInput = $("#searchInput").val();
@@ -12,8 +15,8 @@ $(document).ready(function () {
 function searchPosFunc(seachParam) {
     var searchUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${seachParam}&limit=1&appid=${APIkey}`
     fetch(searchUrl)
-        .then(response => response.json())
-        .then(data => searchWeatherFunc(data));
+    .then(response => response.json())
+    .then(data => searchWeatherFunc(data));
 }
 
 function searchWeatherFunc(dataObj) {
@@ -21,10 +24,17 @@ function searchWeatherFunc(dataObj) {
     var lon = dataObj[0].lon;
     city = dataObj[0].name;
     state = dataObj[0].state;
+    var storageArray = [
+        ...localLoc,
+        `${city}, ${state}`
+    ]
+    localLoc = JSON.parse(localStorage.getItem('location'))||[];
+    localStorage.setItem('location', JSON.stringify(storageArray));
+    LocalStr(localLoc);
     var url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${APIkey}&units=imperial`;
     fetch(url)
-        .then(response => response.json())
-        .then(data => WeatherRender(data));
+    .then(response => response.json())
+    .then(data => WeatherRender(data))
 }
 
 function WeatherRender(dataObj) {
@@ -46,4 +56,11 @@ function fiveDayForecast(dataObj) {
         $(`#day${index}Ahead`).append(`<p>Humidity: ${dataObj.daily[index].humidity}%</p>`);
         $(`#day${index}Ahead`).append(`<p>UV Index: ${dataObj.daily[index].uvi}</p>`);
     }
+}
+function LocalStr(localLoc) {
+    localLoc.forEach(remPlace => {
+        console.log(remPlace);
+        $('#recallCityList').empty();
+        $('#recallCityList').append($(`<li>${remPlace}</li>`));
+    });
 }
