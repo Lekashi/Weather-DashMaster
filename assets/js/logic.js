@@ -13,7 +13,7 @@ $(document).ready(function () {
 });
 
 function searchPosFunc(seachParam) {
-    var searchUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${seachParam}&limit=1&appid=${APIkey}`
+    var searchUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${seachParam}&limit=1&appid=${APIkey}`
     fetch(searchUrl)
     .then(response => response.json())
     .then(data => searchWeatherFunc(data));
@@ -57,9 +57,10 @@ function fiveDayForecast(dataObj) {
         $(`#day${index}Ahead`).append(`<p>UV Index: ${dataObj.daily[index].uvi}</p>`);
     }
 }
-function LocalStr(localLoc) {
+function LocalStr(locStore) {
+    console.log(locStore)
     $('#recallCityList').empty();
-    localLoc.forEach(remPlace => {
+    locStore.forEach(remPlace => {
         $('#recallCityList').append($(`<li>${remPlace}</li>`));
     });
 }
