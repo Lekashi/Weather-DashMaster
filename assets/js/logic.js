@@ -2,15 +2,23 @@ setInterval(function (){$('#currentTime').text(moment().format('dddd, MMMM Do YY
 var APIkey = "b3ffbfc2d2d5a7ba5ea274ccea458047";
 let state;
 let city;
-let localLoc = JSON.parse(localStorage.getItem('location'))||[];
-LocalStr(localLoc);
 
-$(document).ready(function () {
+getLocations();
+
+function getLocations() {
+    let localLoc = JSON.parse(localStorage.getItem('location'));
+    if( localLoc === null) {
+        localLoc = []
+    } else {
+        LocalStr(localLoc);
+    }
+    return localLoc;
+    }
+
     $("#searchButton").click(function () {
         searchInput = $("#searchInput").val();
-        searchPosFunc(searchInput)
+        searchPosFunc(searchInput);
     });
-});
 
 function searchPosFunc(seachParam) {
     var searchUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${seachParam}&limit=1&appid=${APIkey}`
@@ -24,11 +32,13 @@ function searchWeatherFunc(dataObj) {
     var lon = dataObj[0].lon;
     city = dataObj[0].name;
     state = dataObj[0].state;
-    var storageArray = [
-        ...localLoc,
-        `${city}, ${state}`
-    ]
-    JSON.parse(localStorage.getItem('location'))||[];
+    var storageArray = getLocations();
+    if (!storageArray.includes(`${city}, ${state}`)) {
+        storageArray.push(`${city}, ${state}`);
+        localStorage.setItem('location', JSON.stringify(storageArray));
+        LocalStr(storageArray);
+    }
+
     localStorage.setItem('location', JSON.stringify(storageArray));
     LocalStr(storageArray);
     var url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${APIkey}&units=imperial`;
@@ -63,4 +73,17 @@ function LocalStr(locStore) {
     locStore.forEach(remPlace => {
         $('#recallCityList').append($(`<li>${remPlace}</li>`));
     });
+}
+
+$('#recallCityList').on('click', getCity);
+
+function getCity(event) {
+    let targetItem = event.target;
+
+    if(targetItem.matches('li')) {
+        let targetText = targetItem.textContent;
+        let cityArr = targetText.split(',');
+        let cityName = cityArr[0];
+        searchPosFunc(cityName);
+    }
 }
